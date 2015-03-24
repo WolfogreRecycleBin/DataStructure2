@@ -2,9 +2,9 @@
 
 int main()
 {
-	char pre[]={'A','B','D','E','G','H','C','F','I'};
-	char in[]={'D','B','G','E','H','A','C','F','I'};
-	int n = 9;
+	char pre[]={'A','B','E','F','K','L','C','G','D','H','I','M','N','J'};
+	char in[]= {'E','K','L','F','B','G','C','H','M','N','I','J','D','A'};
+	int n = 14;
 	CSTree<char> tree(pre, in, n);
 	tree.Show();
 	cout << tree.Degree();

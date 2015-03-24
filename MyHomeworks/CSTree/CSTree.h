@@ -74,9 +74,29 @@ void CSTree<ElemType>::CreateCSTree(CSTreeNode<ElemType> *&r, ElemType pre[], El
 template <class ElemType>
 void CSTree<ElemType>::Show(CSTreeNode<ElemType> *r, int level) const
 {
-	if(r != NULL)
+	/*if(r != NULL)
 	{
 		Show(r->next_sibling, level + 1);
+		cout << endl;
+		for(int i = 0; i < level - 1; i++)
+			cout << "  ";
+		cout << r->data;
+		Show(r->first_child, level + 1);
+	}*/
+	if(r != NULL)
+	{
+		CSTreeNode<ElemType> *p = r->first_child;
+		CSTreeNode<ElemType>* siblings[1000];
+		int count_sibling = 0;
+		if(p != NULL)
+		while(p->next_sibling != NULL)
+		{
+			p = p->next_sibling;
+			siblings[count_sibling] = p;
+			++count_sibling;
+		}
+		for(int i = count_sibling - 1; i >= 0; --i)
+			Show(siblings[i], level + 1);
 		cout << endl;
 		for(int i = 0; i < level - 1; i++)
 			cout << "  ";
