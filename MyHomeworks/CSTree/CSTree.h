@@ -12,7 +12,7 @@ public:
 	CSTree(const CSTree<ElemType> &t);
 	CSTree(ElemType *preorder_array, ElemType *inorder_array, int length);
 	CSTree<ElemType> &operator=(const CSTree<ElemType> &t);
-	virtual ~CSTree(){};
+	virtual ~CSTree();
 	void Show() const;
 	int Degree();
 protected:
@@ -40,6 +40,13 @@ template <class ElemType>
 CSTree<ElemType>::CSTree(ElemType *preorder_array, ElemType *inorder_array, int length)
 {
 	CreateCSTree(root, preorder_array, inorder_array, 0, length - 1, 0, length - 1);
+}
+
+template <class ElemType>
+CSTree<ElemType>::~CSTree()
+{
+	if(root != NULL)
+		delete root;
 }
 
 template <class ElemType>
@@ -74,15 +81,6 @@ void CSTree<ElemType>::CreateCSTree(CSTreeNode<ElemType> *&r, ElemType pre[], El
 template <class ElemType>
 void CSTree<ElemType>::Show(CSTreeNode<ElemType> *r, int level) const
 {
-	/*if(r != NULL)
-	{
-		Show(r->next_sibling, level + 1);
-		cout << endl;
-		for(int i = 0; i < level - 1; i++)
-			cout << "  ";
-		cout << r->data;
-		Show(r->first_child, level + 1);
-	}*/
 	if(r != NULL)
 	{
 		CSTreeNode<ElemType> *p = r->first_child;
@@ -110,9 +108,9 @@ int CSTree<ElemType>::Degree(int max_degree, CSTreeNode<ElemType> *r)
 {
 	if(r == NULL) return 0;
 	int new_max_degree = max_degree;
-	CSTreeNode<ElemType> *p = r;
+	CSTreeNode<ElemType> *p = r->first_child;
 	int count_degree = 0;
-	while(p->next_sibling != NULL)
+	while(p != NULL)
 	{
 		p = p->next_sibling;
 		++count_degree;
