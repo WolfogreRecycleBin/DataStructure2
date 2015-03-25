@@ -6,8 +6,9 @@ int main(void)
 	{
 		const int n = 10;
 		char c[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-		int a[] = {'a', 'g', 'i', 'c', 'a', 'h', 'f', 'f'};
-		int b[] = {'b', 'd', 'j', 'b', 'c', 'i', 'e', 'd'};
+		char a[] = {'a', 'g', 'i', 'c', 'a', 'h', 'f', 'f'};
+		char b[] = {'b', 'd', 'j', 'b', 'c', 'i', 'e', 'd'};
+		//Fixed by wolfogre:the type of a,b,c should be char, not int.
 		UFSets<char> e(c,n);
 		int i;
 		for (i = 0; i < 8; i++)
@@ -30,7 +31,9 @@ int main(void)
 			cout << "}" << endl;
 			while (p < n && out[p]) p++;
 		}
-
+		
+		cout << "Show the logic:" << endl;
+		e.ShowTree();
 	}
 	catch (Error err)		// 捕捉并处理异常
 	{

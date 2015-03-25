@@ -30,7 +30,7 @@ protected:
 // 辅助函数
     int Find(ElemType e) const;		     // 查找元素e所在等价类的根
     int CollapsingFind(ElemType e) const;// 查找元素e所在等价类的根
-
+	void ShowTree(int index);//to help the function ShowTree(void),show the tree which the root index is int index.
 public:
 // 并查集的函数成员:
 	UFSets(ElemType es[], int n);	     // 构造sz个单结点树(等价类)
@@ -42,7 +42,61 @@ public:
     bool Differ(ElemType a, ElemType b); // 判断元素a、b是否在同一个等价类
 	UFSets(const UFSets &copy);		     // 复制构造函数
 	UFSets &operator =(const UFSets &copy);	// 赋值运算符
+	void ShowTree();//show the tree, so i can know if my new function is working right.
 };
+//Thers are the functions added by wolfogre, to finish the homework num.6 in P208.
+template <class ElemType>
+void UFSets<ElemType>::ShowTree(int index)
+{
+	cout << sets[index].data;
+	int children_of_index[1000];
+	int count_children_of_index =0 ;
+	
+	for(int i=0; i < size; ++i)
+	{
+		if(sets[i].parent == index)
+		{
+			children_of_index[count_children_of_index] = i;
+			++count_children_of_index;
+		}
+	}
+	if(count_children_of_index != 0)
+	{
+		cout << "{";
+		for(int i = 0; i < count_children_of_index; i++)
+			ShowTree(children_of_index[i]);
+		cout << "}";
+	}
+}
+
+template <class ElemType>
+void UFSets<ElemType>::ShowTree()
+{
+	for(int i=0; i < size; ++i)
+	{
+		if(sets[i].parent < 0)
+		{
+			ShowTree(i);
+			cout << endl;
+		}
+	}
+	cout << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                                                                                                                        
 // 并查集的实现部分
