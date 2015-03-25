@@ -67,6 +67,7 @@ void UFSets<ElemType>::ShowTree(int index)
 			ShowTree(children_of_index[i]);
 		cout << "}";
 	}
+	cout << " ";
 }
 
 template <class ElemType>
@@ -80,7 +81,6 @@ void UFSets<ElemType>::ShowTree()
 			cout << endl;
 		}
 	}
-	cout << endl;
 }
 
 
@@ -179,7 +179,11 @@ void UFSets<ElemType>::Union(ElemType a, ElemType b)
 {
 	int r1 = Find(a);					// 查找a所在等价类的根		
 	int r2 = Find(b);					// 查找b所在等价类的根		
-	if (r1 != r2 && r1 != -1) {
+	if (r1 != r2 && r1 != -1 && r2 != -1) {
+	//if (r1 != r2 && r1 != -1) {
+	//Fixed by wolfogre:
+	//r1 != -1 means dont find a,so when run Union(x,b) will do nothing(x means a elem cant be finded),
+	//so if dont add r2 != -1, when run Union(a,x) will cause a error!
        sets[r1].parent += sets[r2].parent;
        sets[r2].parent = r1;	        // 合并等价类
     }
@@ -191,7 +195,7 @@ void UFSets<ElemType>::WeightedUnion(ElemType a, ElemType b)
 {
 	int r1 = Find(a);					// 查找a所在等价类的根		
 	int r2 = Find(b);					// 查找b所在等价类的根		
-	if (r1 != r2 && r1 != -1) {
+	if (r1 != r2 && r1 != -1 && r2 != -1) {
        int  temp = sets[r1].parent + sets[r2].parent;
        if (sets[r1].parent <= sets[r2].parent ) {
            sets[r2].parent = r1;          
