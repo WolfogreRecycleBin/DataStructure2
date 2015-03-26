@@ -45,8 +45,11 @@ public:
 //------------------------------------------------------------------------------------------------------------------
 //begin
 protected:
+	int FindIndexOf(ElemType e);//to find the index of e, not the tree include e.
 	void ShowTree(int index);//to help the function ShowTree(void),show the tree which the root index is int index.
 	int Height(int index);//to help the function HeightedUnion(),it could count the height of a tree.
+	int NodesOf(int index);//to count the nodes in the tree of the index.
+	void CheckUnion(int r1, int r2);//to check r1<-r2 is allright.
 public:
 	void ShowTree();//show the tree, so i can know if my new function is working right.
 	void Union(ElemType a, ElemType b);	////Unnion a and b with a<-b.
@@ -58,6 +61,17 @@ public:
 //There are the function definitions added to finish the homework num.6 in P208.
 //------------------------------------------------------------------------------------------------------------------
 //begin
+template <class ElemType>
+int UFSets<ElemType>::FindIndexOf(ElemType e)
+{
+	for(int i = 0; i < size; ++i)
+	{
+		if(sets[i].data == e)
+			return i;
+	}
+	return -1;
+}
+
 template <class ElemType>
 void UFSets<ElemType>::ShowTree(int index)
 {
@@ -100,6 +114,34 @@ int UFSets<ElemType>::Height(int index)
 }
 
 template <class ElemType>
+int UFSets<ElemType>::NodesOf(int index)
+{
+	int nodes_num = 1;
+	for(int i = 0; i < size; ++i)
+	{
+		if(sets[i].parent == index)
+		{
+			nodes_num += NodesOf(i);
+		}
+	}
+	return nodes_num;
+}
+
+template <class ElemType>
+void UFSets<ElemType>::CheckUnion(int r1, int r2)
+{
+	if(sets[r2].parent != -1)
+	{
+		cout << endl;
+		cout << "error:" << endl;
+		cout << "need to " << sets[r1].data << " <- " << sets[r2].data << ", but r2 have parent already," << endl;
+		cout << sets[r2].data << "'s parent is in index " << sets[r2].parent << endl;
+		system("pause");
+		exit(1);
+	}
+}
+
+template <class ElemType>
 void UFSets<ElemType>::ShowTree()
 {
 	for(int i=0; i < size; ++i)
@@ -115,13 +157,13 @@ void UFSets<ElemType>::ShowTree()
 template <class ElemType>
 void UFSets<ElemType>::Union(ElemType a, ElemType b)
 {
-	int r1 = Find(a);
-	int r2 = Find(b);
+	int r1 = FindIndexOf(a);
+	int r2 = FindIndexOf(b);
 	cout <<  "To Union(" << a << "," << b << "):  ";
 	if (r1 != r2 && r1 != -1 && r2 != -1) {
-       sets[r1].parent += sets[r2].parent;
-       sets[r2].parent = r1;
-	   cout  << sets[r1].data << " <- " << sets[r2].data;
+			CheckUnion(r1,r2);
+		sets[r2].parent = r1;
+		cout  << sets[r1].data << " <- " << sets[r2].data;
     }
 	else
 	{
@@ -133,20 +175,20 @@ void UFSets<ElemType>::Union(ElemType a, ElemType b)
 template <class ElemType>
 void UFSets<ElemType>::HeightedUnion(ElemType a, ElemType b)
 {
-	int r1 = Find(a);
-	int r2 = Find(b);
+	int r1 = FindIndexOf(a);
+	int r2 = FindIndexOf(b);
 	cout <<  "To HeightedUnion(" << a << "," << b << "):  ";
 	if (r1 != r2 && r1 != -1 && r2 != -1)
 	{
-       if (sets[r1].parent >= sets[r2].parent )
+       if (Height(r1) >= Height(r2))
 	   {
-           sets[r2].parent = r1;
-		   cout  << sets[r1].data << " <- " << sets[r2].data;
+			CheckUnion(r1,r2);
+			sets[r2].parent = r1;
+			cout  << sets[r1].data << " <- " << sets[r2].data;
        }
        else
 	   {
 			sets[r2].parent = r1;
-			--sets[r1].parent;
 			cout << sets[r2].data << " <- " << sets[r1].data;
        }
     }
@@ -160,19 +202,18 @@ void UFSets<ElemType>::HeightedUnion(ElemType a, ElemType b)
 template <class ElemType>
 void UFSets<ElemType>::WeightedUnion(ElemType a, ElemType b)
 {
-	int r1 = Find(a);
-	int r2 = Find(b);
+	int r1 = FindIndexOf(a);
+	int r2 = FindIndexOf(b);
 	cout <<  "To WeightedUnion(" << a << "," << b << "):  ";
 	if (r1 != r2 && r1 != -1 && r2 != -1) {
-       int  temp = sets[r1].parent + sets[r2].parent;
-       if (sets[r1].parent <= sets[r2].parent ) {
-			sets[r2].parent = r1;          
-			sets[r1].parent = temp;
+       if (NodesOf(r1) >= NodesOf(r2)) {
+			CheckUnion(r1,r2);
+			sets[r2].parent = r1;
 			cout  << sets[r1].data << " <- " << sets[r2].data;
        }
-       else {  
+       else {
+			CheckUnion(r2,r1);
 			sets[r1].parent = r2;
-			sets[r2].parent = temp;
 			cout << sets[r2].data << " <- " << sets[r1].data;
        }
     }
