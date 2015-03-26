@@ -10,13 +10,42 @@ int main(void)
 	int elems[16];
 	for(int i = 0; i < 16; ++i)
 		elems[i] = i + 1;
-	int a[] = {1,	3,	3,	1,	3,	8,	1,	2,	3,	3,	3,	14,	16,	14,	1,	1};
+	int a[] = {1,	3,	3,	1,	3,	8,	1,	3,	3,	3,	3,	14,	16,	14,	1,	1};
 	int b[] = {2,	4,	5,	7,	6,	9,	8,	10,	11,	12,	13,	15,	0,	16,	3,	14};
 	{//test Union()
 		UFSets<int> e(elems,n);
 		int i;
 		for (i = 0; i < 16; i++)
 			e.Union(a[i], b[i]);
+		
+		cout << "Show the status:" << endl;
+		bool out[n];
+		for (i = 0; i < n; i++)
+			out[i] = false;
+		int p = 0;
+		while (p < n)		{
+			cout << "{" << e.GetElem(p);
+			out[p] = true;
+			for (i = p + 1; i < n; i++)	{
+				if (!e.Differ(e.GetElem(p), e.GetElem(i)))	{
+					cout << "," << e.GetElem(i);
+					out[i] = true;
+				}
+			}
+			cout << "}" << endl;
+			while (p < n && out[p]) p++;
+		}
+		cout << "Show the logic:" << endl;
+		e.ShowTree();
+		system("PAUSE");
+	}
+	
+	
+	{//test HeightedUnion()
+		UFSets<int> e(elems,n);
+		int i;
+		for (i = 0; i < 16; i++)
+			e.HeightedUnion(a[i], b[i]);
 		
 		cout << "Show the status:" << endl;
 		bool out[n];
@@ -67,7 +96,8 @@ int main(void)
 		e.ShowTree();
 		system("PAUSE");
 	}
-	return 0;               // 返回值0, 返回操作系统
+
+	return 0;
 }
 
 

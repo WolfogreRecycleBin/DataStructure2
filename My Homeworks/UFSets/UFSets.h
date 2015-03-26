@@ -30,21 +30,34 @@ protected:
 // 辅助函数
     int Find(ElemType e) const;		     // 查找元素e所在等价类的根
     int CollapsingFind(ElemType e) const;// 查找元素e所在等价类的根
-	void ShowTree(int index);//to help the function ShowTree(void),show the tree which the root index is int index.
+
 public:
 // 并查集的函数成员:
 	UFSets(ElemType es[], int n);	     // 构造sz个单结点树(等价类)
 	virtual ~UFSets();				     // 析构函数
 	ElemType GetElem(int p)const;        // 取指定元素在数组中的下标 
 	int GetOrder(ElemType e)const;       // 根据指定下标取元素值 
-	void Union(ElemType a, ElemType b);	 // 合并a与b所在的等价类
-	void WeightedUnion(ElemType a, ElemType b);	 // 根据结点多少合并a与b所在的等价类
     bool Differ(ElemType a, ElemType b); // 判断元素a、b是否在同一个等价类
 	UFSets(const UFSets &copy);		     // 复制构造函数
 	UFSets &operator =(const UFSets &copy);	// 赋值运算符
+	
+//There are the function declarations added to finish the homework num.6 in P208.
+//------------------------------------------------------------------------------------------------------------------
+//begin
+protected:
+	void ShowTree(int index);//to help the function ShowTree(void),show the tree which the root index is int index.
+	int Height(int index);//to help the function HeightedUnion(),it could count the height of a tree.
+public:
 	void ShowTree();//show the tree, so i can know if my new function is working right.
+	void Union(ElemType a, ElemType b);	////Unnion a and b with a<-b.
+	void HeightedUnion(ElemType a, ElemType b);//Unnion a and b according to the height.
+	void WeightedUnion(ElemType a, ElemType b);//Unnion a and b according to the number of nodes.
+//end
+//------------------------------------------------------------------------------------------------------------------
 };
-//Thers are the functions added by wolfogre, to finish the homework num.6 in P208.
+//There are the function definitions added to finish the homework num.6 in P208.
+//------------------------------------------------------------------------------------------------------------------
+//begin
 template <class ElemType>
 void UFSets<ElemType>::ShowTree(int index)
 {
@@ -71,6 +84,22 @@ void UFSets<ElemType>::ShowTree(int index)
 }
 
 template <class ElemType>
+int UFSets<ElemType>::Height(int index)
+{
+	int max_height = 0;
+	for(int i = 0; i < size; ++i)
+	{
+		if(sets[i].parent == index)
+		{
+			int count_height = Height(i);
+			if(count_height > max_height)
+				max_height = count_height;
+		}
+	}
+	return max_height + 1;
+}
+
+template <class ElemType>
 void UFSets<ElemType>::ShowTree()
 {
 	for(int i=0; i < size; ++i)
@@ -83,22 +112,79 @@ void UFSets<ElemType>::ShowTree()
 	}
 }
 
+template <class ElemType>
+void UFSets<ElemType>::Union(ElemType a, ElemType b)
+{
+	int r1 = Find(a);
+	int r2 = Find(b);
+	cout <<  "To Union(" << a << "," << b << "):  ";
+	if (r1 != r2 && r1 != -1 && r2 != -1) {
+       sets[r1].parent += sets[r2].parent;
+       sets[r2].parent = r1;
+	   cout  << sets[r1].data << " <- " << sets[r2].data;
+    }
+	else
+	{
+		cout << "do nothing";
+	}
+	cout << endl;
+}
 
+template <class ElemType>
+void UFSets<ElemType>::HeightedUnion(ElemType a, ElemType b)
+{
+	int r1 = Find(a);
+	int r2 = Find(b);
+	cout <<  "To HeightedUnion(" << a << "," << b << "):  ";
+	if (r1 != r2 && r1 != -1 && r2 != -1)
+	{
+       if (sets[r1].parent >= sets[r2].parent )
+	   {
+           sets[r2].parent = r1;
+		   cout  << sets[r1].data << " <- " << sets[r2].data;
+       }
+       else
+	   {
+			sets[r2].parent = r1;
+			--sets[r1].parent;
+			cout << sets[r2].data << " <- " << sets[r1].data;
+       }
+    }
+	else
+	{
+		cout << "do nothing";
+	}
+	cout << endl;
+}
 
+template <class ElemType>
+void UFSets<ElemType>::WeightedUnion(ElemType a, ElemType b)
+{
+	int r1 = Find(a);
+	int r2 = Find(b);
+	cout <<  "To WeightedUnion(" << a << "," << b << "):  ";
+	if (r1 != r2 && r1 != -1 && r2 != -1) {
+       int  temp = sets[r1].parent + sets[r2].parent;
+       if (sets[r1].parent <= sets[r2].parent ) {
+			sets[r2].parent = r1;          
+			sets[r1].parent = temp;
+			cout  << sets[r1].data << " <- " << sets[r2].data;
+       }
+       else {  
+			sets[r1].parent = r2;
+			sets[r2].parent = temp;
+			cout << sets[r2].data << " <- " << sets[r1].data;
+       }
+    }
+	else
+	{
+		cout << "do nothing";
+	}
+	cout << endl;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                                       
+//end
+//------------------------------------------------------------------------------------------------------------------
 // 并查集的实现部分
 template <class ElemType>
 UFSets<ElemType>::UFSets(ElemType es[], int n)
@@ -171,41 +257,6 @@ int UFSets<ElemType>::GetOrder(ElemType e) const
 	if (p == size)
 		return -1;							// 集合中不存在元素e 
 	return p;							    // 返元素下标 
-}
-
-template <class ElemType>
-void UFSets<ElemType>::Union(ElemType a, ElemType b)
-// 操作结果：合并a与b所在的等价类
-{
-	int r1 = Find(a);					// 查找a所在等价类的根		
-	int r2 = Find(b);					// 查找b所在等价类的根		
-	if (r1 != r2 && r1 != -1 && r2 != -1) {
-	//if (r1 != r2 && r1 != -1) {
-	//Fixed by wolfogre:
-	//r1 != -1 means dont find a,so when run Union(x,b) will do nothing(x means a elem cant be finded),
-	//so if dont add r2 != -1, when run Union(a,x) will cause a error!
-       sets[r1].parent += sets[r2].parent;
-       sets[r2].parent = r1;	        // 合并等价类
-    }
-}
-
-template <class ElemType>
-void UFSets<ElemType>::WeightedUnion(ElemType a, ElemType b)
-// 操作结果：根据结点多少合并a与b所在的等价类
-{
-	int r1 = Find(a);					// 查找a所在等价类的根		
-	int r2 = Find(b);					// 查找b所在等价类的根		
-	if (r1 != r2 && r1 != -1 && r2 != -1) {
-       int  temp = sets[r1].parent + sets[r2].parent;
-       if (sets[r1].parent <= sets[r2].parent ) {
-           sets[r2].parent = r1;          
-           sets[r1].parent = temp;  
-       }
-       else {  
-           sets[r1].parent = r2;       //r1中的结点个数少，r1指向r2 
-           sets[r2].parent = temp;       
-       }
-    }
 }
 
 template <class ElemType>

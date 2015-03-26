@@ -87,5 +87,6 @@ extraResourceOptions=
 [Resource]
 [Other]
 [History]
-TestUFSets.cpp,1201
-UFSets.h,2275
+TestUFSets.cpp,2294
+C:\MinGWStudio\MinGW\include\c++\3.4.2\iostream,2170
+UFSets.h,4952
