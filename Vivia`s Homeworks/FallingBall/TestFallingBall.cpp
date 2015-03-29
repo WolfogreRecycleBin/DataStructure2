@@ -2,6 +2,7 @@
 int main()
 {
 	int h,n;
+	cout << "please input h,n:" << endl;
 	while(cin >> h >> n)
 	{
 		FallingBall fb(h);
