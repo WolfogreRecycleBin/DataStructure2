@@ -1,5 +1,5 @@
 [Project]
-name=Circle
+name=FallingBall
 type=0
 defaultConfig=0
 
@@ -26,7 +26,7 @@ optimizeLevel=0
 
 // linker
 libraryPath=
-outputFilename=Debug\Circle.exe
+outputFilename=Debug\FallingBall.exe
 libraries=
 extraLinkerOptions=
 ignoreStartupFile=0
@@ -64,7 +64,7 @@ optimizeLevel=2
 
 // linker
 libraryPath=
-outputFilename=Release\Circle.exe
+outputFilename=Release\FallingBall.exe
 libraries=
 extraLinkerOptions=
 ignoreStartupFile=0
@@ -80,16 +80,20 @@ resourceIncludeDirectory=
 extraResourceOptions=
 
 [Source]
-1=TestCircle.cpp
+1=TestFallingBall.cpp
 [Header]
 1=Assistance.h
-2=Circle.h
-3=DblLinkList.h
-4=DblNode.h
+2=BinTreeNode.h
+3=BinaryTree.h
+4=LinkQueue.h
+5=Node.h
+6=FallingBall.h
 [Resource]
 [Other]
 [History]
-Circle.h,601
-DblNode.h,0
-DblLinkList.h,536
-TestCircle.cpp,381
+BinaryTree.h,14711
+BinTreeNode.h,690
+LinkQueue.h,0
+Assistance.h,0
+FallingBall.h,912
+TestFallingBall.cpp,221

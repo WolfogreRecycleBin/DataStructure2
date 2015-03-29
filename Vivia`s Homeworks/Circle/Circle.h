@@ -21,8 +21,9 @@ bool Circle::Show()
 	for(DblNode<int> *p = (DblLinkList<int>::GetHead())->next;
 		p != NULL && p != (DblLinkList<int>::GetHead()); p = p->next)
 	{
-		cout << p->data << '\t';
+		cout << p->data << ' ';
 	}
+	cout << endl;
 	return true;
 }
 

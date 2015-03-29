@@ -10,8 +10,14 @@ int main()
 	int min_four[4];
 	int min = 100;
 	c.CountMinFour(min_four, min);
-	cout << max << endl;
-	cout << min << endl;
+	cout << "Max:";
+	for(int i = 0; i < 4; ++i)
+		cout << max_four[i] << " ";
+	cout << "Sum:" << max << endl;
+	cout << "Min:";
+	for(int i = 0; i < 4; ++i)
+		cout << min_four[i] << " ";
+	cout << "Sum:" << min << endl;
 	return 0;
 }
-
+//If you find bugs, please e-mail wolfogre@qq.com
