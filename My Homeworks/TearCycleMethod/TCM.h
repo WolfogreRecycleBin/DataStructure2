@@ -1,7 +1,12 @@
 #ifndef __TCM_H__
 #define __TCM_H__
 #include "AdjMatrixUndirNetwork.h"
-
+struct Edge
+{
+	int vertex1;
+	int vertex2;
+	int weight;
+};
 //this way is :
 //1,Find all edge, than sort it from max to min;
 //2,Traversal those edge to do
@@ -10,14 +15,8 @@
 // 	b,check the gragh if become unconnected, if yes, insert the edge which just deleted, if no, go on;
 // }
 template <class ElemType, class WeightType>
-void MiniSpanTreeTCN(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
+void MiniSpanTreeTCN_1(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 {
-	struct Edge
-	{
-		int vertex1;
-		int vertex2;
-		int weight;
-	};
 	Edge edge[100];
 	int edge_num = 0;
 	AdjMatrixUndirNetwork<ElemType, WeightType> g_temp = g;
@@ -47,5 +46,20 @@ void MiniSpanTreeTCN(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 	}
 	g_temp.Display();
 }
+
+//this way is :
+//1,Find a cycle, if did not find exit
+//2,Delete the max weight edge in the cycle;
+//3,return to 1
+template <class ElemType, class WeightType>
+void MiniSpanTreeTCN_2(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
+{
+	Edge edge[100];
+	int edge_num = 0;
+	AdjMatrixUndirNetwork<ElemType, WeightType> g_temp = g;
+	FindCycle(edge,edge_num);
+}
+
+bool FindCycle(Edge* p_edge,int &edge_num)
 #endif
 
