@@ -5,7 +5,26 @@
 template <class ElemType, class WeightType>
 void MiniSpanTreeTCN(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 {
-	;
+	struct
+	{
+		int v1,v2;
+	}ignored[100];
+	ignored_num = 0;
+	AdjMatrixUndirNetwork<ElemType, WeightType> g_temp = g;
+	//g_temp.Display();
+	int v1,v2,weight;
+	weight = g_temp.GetMaxArc(v1,v2,ignored);
+	while(weight != -1)
+	{
+		g_temp.DeleteArc(v1,v2);
+		if(!g_temp.IsConnected())
+		{
+			g_temp.InsertArc(v1,v2,weight);
+		}
+		weight = g_temp.GetMaxArc(v1,v2,v1,v2,weight);
+	}
+	
+	g_temp.Display();
 }
 
 /*// Kruskal±ﬂ¿‡

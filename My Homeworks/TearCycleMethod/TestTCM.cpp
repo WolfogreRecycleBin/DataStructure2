@@ -25,6 +25,7 @@ int main(void)
 		cout << "原网:" << endl;
 		net.Display();
 		cout << endl;
+		net.IsConnected();
 		system("PAUSE");
 
 		cout << "TCM算法产生最小生成树的边:" << endl;

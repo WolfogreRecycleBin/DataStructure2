@@ -43,7 +43,71 @@ public:
 	AdjMatrixUndirNetwork<ElemType, WeightType> &operator =(const AdjMatrixUndirNetwork<ElemType, WeightType> &g); 
 		// 赋值语句重载
   void Display();	                         // 显示邻接矩阵无向图
+//-------------------------------------------------------------------------------------------------------------------------
+public:
+	bool IsConnected();//ruturn if the graph is connected
+	int GetMaxArc(int &v1,int &v2,int reference_v1,int reference_v2,int reference_weight);//find a arc with max weight
+protected:
+  	void Visit(int v);//visit every vertex by DFS
+//-------------------------------------------------------------------------------------------------------------------------
 };
+
+//-------------------------------------------------------------------------------------------------------------------------
+template <class ElemType, class WeightType>
+bool AdjMatrixUndirNetwork<ElemType, WeightType>::IsConnected()
+{
+	{
+  		for(int i = 0; i < vexNum; ++i)
+  			tag[i] = UNVISITED;
+  		Visit(0);
+		cout << endl;
+		for(int i = 0; i < vexNum; ++i)
+  			if(tag[i] != VISITED)
+  				return false;
+  		return true;
+  	}
+}
+
+template <class ElemType, class WeightType>
+int AdjMatrixUndirNetwork<ElemType, WeightType>::GetMaxArc(int &v1,int &v2,int reference_v1,int reference_v2,int reference_weight)
+{
+	if(edgeNum == 0)
+	{
+		cerr << "edgeNum == 0, cannot GetMaxArc" << endl;
+		system("pause");
+		exit(-1);
+	}
+	int max_wight = -1;
+	for (int v = 0; v < vexNum; v++)
+		for (int u = 0; u < vexNum; u++)
+			if(
+				arcs[v][u] != infinity
+				&& arcs[v][u] >= max_wight
+				&& arcs[v][u] <= reference_weight
+				&& (v != reference_v1 || u != reference_v2)
+				)
+			{
+				max_wight = arcs[v][u];
+				v1 = v;
+				v2 = u;
+			}
+	return max_wight;
+}
+
+template <class ElemType, class WeightType>
+void AdjMatrixUndirNetwork<ElemType, WeightType>::Visit(int v)
+{
+	if(tag[v] == VISITED)
+		return;
+	cout << v << " ";
+	tag[v] = VISITED;
+	for(int i_v = FirstAdjVex(v); i_v != -1; i_v = NextAdjVex(v,i_v))
+		Visit(i_v);
+}
+//-------------------------------------------------------------------------------------------------------------------------
+
+
+
 
 // 无向图的邻接矩阵类的实现部分
 template <class ElemType, class WeightType>
