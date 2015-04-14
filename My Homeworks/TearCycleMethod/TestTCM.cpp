@@ -28,7 +28,7 @@ int main(void)
 		net.IsConnected();
 		system("PAUSE");
 
-		cout << "TCM算法产生最小生成树的边:" << endl;
+		cout << "破圈后的网:" << endl;
 		MiniSpanTreeTCN(net);
 		cout << endl;
 	}
