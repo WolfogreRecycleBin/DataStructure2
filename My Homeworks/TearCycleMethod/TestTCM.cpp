@@ -29,7 +29,7 @@ int main(void)
 		system("PAUSE");
 
 		cout << "ÆÆÈ¦ºóµÄÍø:" << endl;
-		MiniSpanTreeTCN(net);
+		MiniSpanTreeTCN_1(net);
 		cout << endl;
 	}
 	catch (Error err)

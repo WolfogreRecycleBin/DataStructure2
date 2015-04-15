@@ -57,9 +57,15 @@ void MiniSpanTreeTCN_2(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 	Edge edge[100];
 	int edge_num = 0;
 	AdjMatrixUndirNetwork<ElemType, WeightType> g_temp = g;
-	FindCycle(edge,edge_num);
+	FindCycle(edge,g_temp);
 }
 
-bool FindCycle(Edge* p_edge,int &edge_num)
+bool FindCycle(Edge* edge,const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
+{
+	for (int v = 0; v < g_temp.GetVexNum(); v++)
+	{
+		FindWay(v,)
+	}
+}
 #endif
 
