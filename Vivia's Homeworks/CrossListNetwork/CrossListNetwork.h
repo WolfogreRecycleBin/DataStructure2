@@ -357,7 +357,7 @@ WeightType CrossListNetwork<ElemType, WeightType>::GetWeight(int v1, int v2) con
 		throw Error("v2²»ºÏ·¨!");
 
 	CrossListNetworkArc<WeightType> *p;
-	p = vex_table[v1].firs_out_tarc;
+	p = vex_table[v1].first_out_arc;
 	while(p != NULL && p->head_vex != v2) 
 		p = p->tail_next_arc;
 	if(p != NULL)
