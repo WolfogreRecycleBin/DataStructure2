@@ -51,7 +51,7 @@ void MiniSpanTreeTCN_1(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 //1,Find a cycle, if did not find exit
 //2,Delete the max weight edge in the cycle;
 //3,return to 1
-template <class ElemType, class WeightType>
+/*template <class ElemType, class WeightType>
 void MiniSpanTreeTCN_2(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 {
 	Edge edge[100];
@@ -66,6 +66,6 @@ bool FindCycle(Edge* edge,const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
 	{
 		FindWay(v,)
 	}
-}
+}*/
 #endif
 
