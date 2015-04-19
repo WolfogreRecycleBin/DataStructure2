@@ -1,19 +1,10 @@
 #include "CrossListNetwork.h"
+#include "ShortestPathBellmanFord.h"
 int main()
 {
 	try
 	{
 		int infity = DEFAULT_INFINITY;
-		/*char vexs[] = {'A', 'B', 'C', 'D'};
-		int m[4][4] = {
-			{infity, 2, 3, 4},
-			{2, infity, 5, 6},
-			{3, 5, infity, 7},
-			{4, 6, 7, infity}
-		};
-		char c = 'a', e, e1, e2;
-		int n = 4, v, v1, v2, w;
-		*/
 		int I = DEFAULT_INFINITY;
 		char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F'};
 		int m[6][6] = {
@@ -25,14 +16,16 @@ int main()
 		/*E*/	{I, I, I, 6, I, I},
 		/*F*/	{I, I, I, I, I, I},
 		};
-		char c = 'a', e, e1, e2;
+		char e, e1, e2;
 		int n = 6, v, v1, v2, w;
 		CrossListNetwork<char, int> net(vexs, n);
 		for (int v = 0; v < n; v++)
 			for (int u = 0; u < n; u++)
-				if (m[v][u] != infity) net.InsertArc(v, u, m[v][u]);
-
-	    while (c != '0')	{
+				if (m[v][u] != infity)
+					net.InsertArc(v, u, m[v][u]);
+		char c = 'x';
+	    while (c != '0')
+		{
             cout << endl << "1. 有向网清空.";
             cout << endl << "2. 显示有向网.";
             cout << endl << "3. 取指定顶点的值.";
@@ -42,10 +35,12 @@ int main()
             cout << endl << "7. 删除边.";
             cout << endl << "8. 插入边.";
             cout << endl << "9. 设置指定边的权.";
+			cout << endl << "a. 计算最短路径.";
 		    cout << endl << "0. 退出";
 		    cout << endl << "选择功能(0~9):";
 		    cin >> c;
-		    switch (c) 		{
+		    switch (c)
+			{
 			    case '1':
 			        net.Clear();
 				    break;
@@ -99,6 +94,17 @@ int main()
 			        v2 = net.GetOrder(e2);
 		            net.SetWeight(v1, v2, w);
 			        break;
+				case 'a':
+			        cout << "原网:" << endl;
+					net.Display();
+					cout << endl;
+					system("PAUSE");
+					int dist[n], path[n], v0 = 0;
+					ShortestPathBellmanFord(net, v0, path, dist);
+					DisplayPathAndDist(net, v0, path, dist);
+					cout << endl;
+					system("PAUSE");
+					break;
        	      }
          }
 	}
