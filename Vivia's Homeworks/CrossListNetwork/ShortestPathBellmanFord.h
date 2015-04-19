@@ -11,12 +11,14 @@ void DisplayPathAndDist(const CrossListNetwork<ElemType, WeightType> &g, int v0,
 	WeightType infinity = g.GetInfinity();
     g.GetElem(v0, e1);
 	for (int v1 = 0; v1 < g.GetVexNum(); v1++)	{
-       cout << endl;
-       g.GetElem(v1, e2);
+
        if (v1 != v0) 
-	      if (dist[v1] < infinity )		{	// 存在从v0到v1最短路径
-			 cout << "从顶点 " << e1 << " 到 " << e2 << ":";
-			 cout << " 路径长度 = " << dist[v1];
+	   {
+			cout << endl;
+			g.GetElem(v1, e2);
+			if (dist[v1] < infinity )		{	// 存在从v0到v1最短路径
+			cout << "从顶点 " << e1 << " 到 " << e2 << ":";
+			cout << " 路径长度 = " << dist[v1];
 			 cout << " 路径:";
 			 LinkStack<int> s;	// 存储路上的顶点
 			 int v = v1;
@@ -33,8 +35,8 @@ void DisplayPathAndDist(const CrossListNetwork<ElemType, WeightType> &g, int v0,
 		 }
 	 	 else 	// 从v0到v1无路径
 			cout << "从顶点 " << e1 << " 到 "  << e2 << "无路径";
+	   }
    }
-   cout << endl;
 }
 
 

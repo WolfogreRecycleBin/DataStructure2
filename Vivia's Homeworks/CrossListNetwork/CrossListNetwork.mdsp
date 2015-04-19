@@ -86,10 +86,14 @@ extraResourceOptions=
 2=Assistance.h
 3=CrossListNetworkArc.h
 4=CrossListNetworkVex.h
+5=LinkStack.h
+6=Node.h
+7=ShortestPathBellmanFord.h
 [Resource]
 [Other]
 [History]
-CrossListNetwork.h,10489
-CrossListNetworkArc.h,0
 CrossListNetworkVex.h,0
-TestCrossListNetwork.cpp,275
+CrossListNetworkArc.h,0
+CrossListNetwork.h,10634
+ShortestPathBellmanFord.h,647
+TestCrossListNetwork.cpp,3221

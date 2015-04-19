@@ -100,10 +100,14 @@ int main()
 					net.Display();
 					cout << endl;
 					system("PAUSE");
-					int dist[n], path[n], v0 = 0;
-					ShortestPathBellmanFord(net, v0, path, dist);
-					DisplayPathAndDist(net, v0, path, dist);
-					cout << endl;
+					int n = net.GetVexNum();
+					for(int v = 0; v < n; v++)
+					{
+						int dist[n], path[n];
+						ShortestPathBellmanFord(net, v, path, dist);
+						DisplayPathAndDist(net, v, path, dist);
+						cout << endl;
+					}
 					system("PAUSE");
 					break;
 				}
