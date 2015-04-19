@@ -89,11 +89,13 @@ extraResourceOptions=
 5=LinkStack.h
 6=Node.h
 7=ShortestPathBellmanFord.h
+8=CriticalPath.h
+9=LinkQueue.h
 [Resource]
 [Other]
 [History]
-ShortestPathBellmanFord.h,644
-CrossListNetwork.h,10634
-CrossListNetworkArc.h,0
 CrossListNetworkVex.h,0
-TestCrossListNetwork.cpp,3397
+CrossListNetworkArc.h,0
+CrossListNetwork.h,5620
+ShortestPathBellmanFord.h,644
+TestCrossListNetwork.cpp,362
