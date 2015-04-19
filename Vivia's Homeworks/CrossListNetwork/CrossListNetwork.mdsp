@@ -80,9 +80,16 @@ resourceIncludeDirectory=
 extraResourceOptions=
 
 [Source]
+1=TestCrossListNetwork.cpp
 [Header]
 1=CrossListNetwork.h
+2=Assistance.h
+3=CrossListNetworkArc.h
+4=CrossListNetworkVex.h
 [Resource]
 [Other]
 [History]
-CrossListNetwork.h,0
+CrossListNetwork.h,10489
+CrossListNetworkArc.h,0
+CrossListNetworkVex.h,0
+TestCrossListNetwork.cpp,275
