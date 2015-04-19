@@ -1,5 +1,6 @@
 #include "CrossListNetwork.h"
 #include "ShortestPathBellmanFord.h"
+#include "CriticalPath.h"
 int main()
 {
 	try
@@ -35,7 +36,8 @@ int main()
             cout << endl << "7. 删除边.";
             cout << endl << "8. 插入边.";
             cout << endl << "9. 设置指定边的权.";
-			cout << endl << "a. 计算最短路径.";
+			cout << endl << "a. 求最短路径.";
+			cout << endl << "b. 求关键活动.";
 		    cout << endl << "0. 退出";
 		    cout << endl << "选择功能(0~9):";
 		    cin >> c;
@@ -110,6 +112,37 @@ int main()
 					}
 					system("PAUSE");
 					break;
+				}
+				case 'b':
+				{
+					char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+					int m[7][7] = {
+						{I, 3, 2, 6, I, I, I},
+						{I, I, I, 2, 4, I, I},
+						{I, I, I, 1, I, 3, I},
+						{I, I, I, I, 1, I, I},
+						{I, I, I, I, I, I, 3},
+						{I, I, I, I, I, I, 4},
+						{I, I, I, I, I, I, I}
+					};
+					int n = 7;
+
+					CrossListNetwork<char, int> net(vexs, n);
+
+					for (int u = 0; u < n; u++)
+						for (int v = n-1; v >= 0; v--)
+							if (m[u][v] != infity) net.InsertArc(u, v, m[u][v]);
+					cout << endl;
+					cout << "由于求关键活动要求原图不允许有回路且图连通，\n故重新生成一个没有回路且连通的十字链表有向网方便演示:" << endl;
+					net.Display();					// 显示网net
+					cout << endl;
+					system("PAUSE");				// 调用库函数system()
+
+					if (CriticalPath(net) == SUCCESS)
+						cout << endl << "存在关键活动" << endl;
+					else
+						cout << endl << "不存在关键活动 " << endl;
+					cout << endl;
 				}
        	    }
          }

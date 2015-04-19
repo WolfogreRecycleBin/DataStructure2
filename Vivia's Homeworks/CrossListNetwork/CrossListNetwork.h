@@ -174,7 +174,7 @@ int CrossListNetwork<ElemType, WeightType>::FirstToVex(int v) const
 	if (v < 0 || v >= vex_num)
        throw Error("v²»ºÏ·¨!");
 
-	if (vex_table[v].firs_out_tarc == NULL)
+	if (vex_table[v].first_out_arc == NULL)
 	   return -1;
 	else
 	   return vex_table[v].first_out_arc->head_vex;
