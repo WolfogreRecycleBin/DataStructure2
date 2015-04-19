@@ -95,6 +95,7 @@ int main()
 		            net.SetWeight(v1, v2, w);
 			        break;
 				case 'a':
+				{
 			        cout << "原网:" << endl;
 					net.Display();
 					cout << endl;
@@ -105,7 +106,8 @@ int main()
 					cout << endl;
 					system("PAUSE");
 					break;
-       	      }
+				}
+       	    }
          }
 	}
 	catch (Error err)					// 捕捉并处理异常
