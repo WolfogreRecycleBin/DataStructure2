@@ -94,9 +94,13 @@ extraResourceOptions=
 [Other]
 1=topic.txt
 [History]
-Œ Ã‚.txt,0
 topic.txt,0
-AdjListDirNetwork.h,8609
-CriticalPath.h,2415
-TestCriticalPath.cpp,1088
-LinkQueue.h,0
+AdjListDirNetwork.h,0
+CriticalPath.h,0
+TestCriticalPath.cpp,1118
+LinkStack.h,2211
+AdjListDirNetworkArc.h,167
+AdjListDirNetworkVex.h,0
+Assistance.h,0
+Node.h,0
+LinkQueue.h,580
