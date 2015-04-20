@@ -463,7 +463,8 @@ void AdjListDirNetwork<ElemType, WeightType>::Display()
 		cout << v << ":\t" << vexTable[v].data;				// ÏÔÊ¾¶¥µãºÅ
 	    p = vexTable[v].firstarc;
 	    while (p != NULL) {
-        	cout << "-->(" << p->adjVex << "," << p->weight << ")";
+        	//cout << "-->(" << p->adjVex << "," << p->weight << ")";
+        	cout << "-->(" << p->adjVex << ":" << vexTable[p->adjVex].data << "," << p->weight << ")";
             p = p->nextarc; 
 		}
 		cout << endl; 
