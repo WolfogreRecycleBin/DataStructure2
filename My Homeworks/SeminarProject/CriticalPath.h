@@ -22,6 +22,7 @@ Status CriticalPath(const AdjListDirNetwork<ElemType, WeightType> &g)
 // 初始条件：存在有向网g
 // 操作结果：如g无回路,则输出g的关键活动,并返回SUCCESS,否则返回FAIL
 {
+	int start ,end;
 	int *indegree = new int[g.GetVexNum()];	// 顶点入度数组
 	WeightType *ve = new int[g.GetVexNum()];	// 事件最早发生时刻数组
 	WeightType *vl = new int[g.GetVexNum()];  // 事件最迟发生时刻数组
@@ -41,6 +42,10 @@ Status CriticalPath(const AdjListDirNetwork<ElemType, WeightType> &g)
 		q.DelQueue(u);			// 取出一个入度为0的顶点
 		s.Push(u);				// 顶点u入栈,以便得逆拓扑排序序列
 		count++;				// 对顶点进行记数
+		if(count == 1)
+			start = u;
+		if(count == g.GetVexNum())
+			end = u;
 		for (v = g.FirstAdjVex(u); v != -1; v = g.NextAdjVex(u, v))		{
             // v为弧<u,v>的弧头顶点,对u的每个邻接点入度减1
 			if (--indegree[v] == 0)	// v入度为0,将v入队
@@ -73,10 +78,16 @@ Status CriticalPath(const AdjListDirNetwork<ElemType, WeightType> &g)
 			if (ee == el)	{	// <u, v>为关键活动
 				g.GetElem(u, e1);
 				g.GetElem(v, e2);
+				g.SetCriticalArc(u,v);
 				cout << "<" << e1 << "," << e2 << "> ";
 			}
 		}
 	}
+	cout << endl;
+	cout << endl;
+	system("pause");
+	cout << "显示关键路径:" << endl;
+	g.ShowCriticalPath(start, end);
 	
 	delete []ve;				// 释放ve所占用的存储空间
 	delete []vl;				// 释放vl所占用的存储空间

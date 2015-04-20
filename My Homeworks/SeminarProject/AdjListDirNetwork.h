@@ -4,6 +4,7 @@
 #include "Assistance.h"						// 辅助软件包
 #include "AdjListDirNetworkArc.h"			// 网络邻接表的边结点类
 #include "AdjListDirNetworkVex.h"			// 网络邻接表的顶点结点类
+#include "LinkStack.h"
 
 // 有向网的邻接表类
 template <class ElemType, class WeightType>
@@ -48,8 +49,91 @@ public:
 	AdjListDirNetwork<ElemType, WeightType> &operator =
 		(const AdjListDirNetwork<ElemType, WeightType> &copy); // 重载赋值运算符 
     void Display();	// 显示有向网邻接表 
+//------------------------------------------------------------------------------------------------
+//added to show critical path
+public:
+    void SetCriticalArc(int v1, int v2) const;//setting the arc between v1 and v2 is a criticala arc
+    void ShowCriticalPath(int v1, int v2) const;//called by user to show critical path
+protected:
+	void ShowCriticalPath(int v1, int v2, LinkStack<ElemType> &q) const;//show critical path
+//------------------------------------------------------------------------------------------------
 };
+//------------------------------------------------------------------------------------------------
+template <class ElemType, class WeightType>
+void AdjListDirNetwork<ElemType, WeightType>::SetCriticalArc(int v1, int v2) const
+{
+	if (v1 < 0 || v1 >= vexNum)
+		throw Error("v1不合法!");
+	if (v2 < 0 || v2 >= vexNum)
+		throw Error("v2不合法!");
+	if (v1 == v2) throw
+		Error("v1不能等于v2!");
 
+	AdjListNetworkArc<WeightType> *p;
+	p = vexTable[v1].firstarc;
+	while (p != NULL && p->adjVex != v2)
+	{
+		p = p->nextarc;
+	}
+	if (p != NULL)
+	{
+		p->critical_arc = 1;
+	}
+}
+
+template <class ElemType, class WeightType>
+void AdjListDirNetwork<ElemType, WeightType>::ShowCriticalPath(int v1, int v2) const
+{
+	LinkStack<ElemType> q;
+	ShowCriticalPath(v1,v2,q);
+}
+
+template <class ElemType, class WeightType>
+void AdjListDirNetwork<ElemType, WeightType>::ShowCriticalPath(int v1, int v2, LinkStack<ElemType> &q) const
+{
+	q.Push(vexTable[v1].data);
+	if(v1 == v2)
+	{
+		LinkStack<ElemType> temp;
+		while(!q.IsEmpty())
+		{
+			ElemType t;
+			q.Pop(t);
+			temp.Push(t);
+		}
+		bool is_begin = true;
+		while(!temp.IsEmpty())
+		{
+			ElemType t;
+			temp.Pop(t);
+			q.Push(t);
+			if(is_begin)
+			{
+				cout << t;
+				is_begin = !is_begin;
+			}
+			else
+			{
+				cout << " -> " << t;
+			}
+		}
+		cout << endl;
+		ElemType t;
+		q.Pop(t);
+		return;
+	}
+	for(AdjListNetworkArc<WeightType> *p = vexTable[v1].firstarc; p != NULL; p = p->nextarc)
+	{
+		if(p->critical_arc == 1)
+		{
+			ShowCriticalPath(p->adjVex, v2, q);
+		}
+	}
+	ElemType t;
+	q.Pop(t);
+	return;
+}
+//------------------------------------------------------------------------------------------------
 // 有向网的邻接表类的实现部分
 template <class ElemType, class WeightType>
 AdjListDirNetwork<ElemType, WeightType>::AdjListDirNetwork(ElemType es[],
@@ -465,6 +549,7 @@ void AdjListDirNetwork<ElemType, WeightType>::Display()
 	    while (p != NULL) {
         	//cout << "-->(" << p->adjVex << "," << p->weight << ")";
         	cout << "-->(" << p->adjVex << ":" << vexTable[p->adjVex].data << "," << p->weight << ")";
+			//cout << "-->(" << p->adjVex << ":" << vexTable[p->adjVex].data << "," << p->weight << "," << p->critical_arc << ")";
             p = p->nextarc; 
 		}
 		cout << endl; 

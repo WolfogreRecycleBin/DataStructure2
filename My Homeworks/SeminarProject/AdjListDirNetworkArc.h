@@ -6,6 +6,7 @@ template <class WeightType>
 struct AdjListNetworkArc
 {
 // 数据成员:
+	mutable int critical_arc;
 	int adjVex;								// 弧头顶点序号
 	WeightType weight;						// 边的权值
 	AdjListNetworkArc<WeightType> *nextarc; // 下一条边结点的指针 
@@ -20,6 +21,7 @@ template <class WeightType>
 AdjListNetworkArc<WeightType>::AdjListNetworkArc()
 // 操作结果：构造一个空邻接表边结点边——无参构造函数
 {
+	critical_arc = 0;
 	adjVex = -1;
 }
 
@@ -27,6 +29,7 @@ template <class WeightType>
 AdjListNetworkArc<WeightType>::AdjListNetworkArc(int v, WeightType w, AdjListNetworkArc<WeightType> *next)
 // 操作结果：构造邻接点序号为v，边的权为w，下一条边结点的指针为next的邻接边
 {
+	critical_arc = 0;
 	adjVex = v;	
 	weight = w;
     nextarc = next;
