@@ -94,8 +94,8 @@ extraResourceOptions=
 [Resource]
 [Other]
 [History]
-CrossListNetworkVex.h,0
-CrossListNetworkArc.h,0
-CrossListNetwork.h,5620
 ShortestPathBellmanFord.h,644
-TestCrossListNetwork.cpp,362
+CrossListNetwork.h,5592
+CrossListNetworkArc.h,0
+CrossListNetworkVex.h,0
+TestCrossListNetwork.cpp,335

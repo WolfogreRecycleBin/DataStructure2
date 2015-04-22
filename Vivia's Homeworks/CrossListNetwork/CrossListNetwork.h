@@ -276,7 +276,7 @@ void CrossListNetwork<ElemType, WeightType>::DeleteVex(const ElemType &d)
 		if (u != v)
 		{
 			DeleteArc(u, v);
-			DeleteArc(u, v);
+			DeleteArc(v, u);
 		}
 
 	vex_num--;
