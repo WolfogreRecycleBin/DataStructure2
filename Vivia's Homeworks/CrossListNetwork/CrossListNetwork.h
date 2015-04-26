@@ -338,8 +338,8 @@ void CrossListNetwork<ElemType, WeightType>::DeleteArc(int v1, int v2)
 		p = p->head_next_arc;
 	}
 	if(p != NULL) {
-		if (vex_table[v1].first_in_arc == p)
-			vex_table[v1].first_in_arc = p->head_next_arc;
+		if (vex_table[v2].first_in_arc == p)
+			vex_table[v2].first_in_arc = p->head_next_arc;
 		else
 			q->head_next_arc = p->head_next_arc;
 		delete p;
