@@ -28,7 +28,7 @@ void MiniSpanTreeTCN_1(const AdjMatrixUndirNetwork<ElemType, WeightType> &g)
                 edge[edge_num].weight = g_temp.GetWeight(v,u);
                 ++edge_num;
 			}
-	for(int i = edge_num; i >= 0; --i)
+	for(int i = edge_num - 1; i >= 0; --i)
 		for(int j = 0; j < i; ++j)
 			if(edge[j].weight < edge[j+1].weight)
 			{
