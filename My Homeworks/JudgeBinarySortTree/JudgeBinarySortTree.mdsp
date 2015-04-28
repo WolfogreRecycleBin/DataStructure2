@@ -91,6 +91,6 @@ extraResourceOptions=
 [Resource]
 [Other]
 [History]
-JudgeBST.h,1161
-BinaryTree.h,16052
 TestJudgeBST.cpp,0
+BinaryTree.h,16051
+JudgeBST.h,1276
