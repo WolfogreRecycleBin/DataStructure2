@@ -507,10 +507,8 @@ BinaryTree<ElemType> &CreateBinaryTree(ElemType pre[], ElemType in[], int n)
 	BinTreeNode<ElemType> *r;						// 二叉树的根
 	CreateBinaryTree<ElemType>(r, pre, in, 0, n - 1, 0, n - 1);
 		// 由先序和中序序列构造以r为根的二叉树 
-	//BinaryTree<ElemType> *bt = new BinaryTree<ElemType>(r);	// 生成二叉树
-	//return *bt;
-	return *r;
-	//Fixed by wolfogre:I dont think we need bt, return r or leaks memory of r.
+	BinaryTree<ElemType> *bt = new BinaryTree<ElemType>(r);	// 生成二叉树
+	return *bt;
 }
 
 #endif
