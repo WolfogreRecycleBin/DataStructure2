@@ -1,5 +1,5 @@
 [Project]
-name=JudgeBinarySortTree
+name=BinaryAvlTree
 type=0
 defaultConfig=0
 
@@ -26,7 +26,7 @@ optimizeLevel=0
 
 // linker
 libraryPath=
-outputFilename=Debug\JudgeBinarySortTree.exe
+outputFilename=Debug\BinaryAvlTree.exe
 libraries=
 extraLinkerOptions=
 ignoreStartupFile=0
@@ -64,7 +64,7 @@ optimizeLevel=2
 
 // linker
 libraryPath=
-outputFilename=Release\JudgeBinarySortTree.exe
+outputFilename=Release\BinaryAvlTree.exe
 libraries=
 extraLinkerOptions=
 ignoreStartupFile=0
@@ -80,17 +80,15 @@ resourceIncludeDirectory=
 extraResourceOptions=
 
 [Source]
-1=TestJudgeBST.cpp
+1=TestBinaryAvlTree.cpp
 [Header]
 1=Assistance.h
-2=BinTreeNode.h
-3=BinaryTree.h
+2=BinAvlTreeNode.h
+3=BinaryAvlTree.h
 4=LinkQueue.h
-5=Node.h
-6=JudgeBST.h
+5=LinkStack.h
+6=Node.h
 [Resource]
 [Other]
 [History]
-TestJudgeBST.cpp,0
-BinaryTree.h,16051
-JudgeBST.h,1115
+TestBinaryAvlTree.cpp,362
