@@ -14,6 +14,7 @@ struct BinAVLTreeNode
 	int bf;									// 结点的平衡因子
 	BinAVLTreeNode<ElemType> *leftChild;	// 左孩子指针域
 	BinAVLTreeNode<ElemType> *rightChild;	// 右孩子指针域
+	int lsize;
 
 //	构造函数:
 	BinAVLTreeNode();						// 无参数的构造函数 
@@ -30,6 +31,7 @@ BinAVLTreeNode<ElemType>::BinAVLTreeNode()
 {
 	bf = 0;							// 平衡因子
 	leftChild = rightChild = NULL;	// 叶结点左右孩子为空
+	lsize = 0;
 }
 
 template <class ElemType>
@@ -43,6 +45,7 @@ BinAVLTreeNode<ElemType>::BinAVLTreeNode(const ElemType &e, int bFactor,
 	bf = bFactor;					// 平衡因子
 	leftChild = lChild;				// 左孩子
 	rightChild = rChild;			// 右孩子
+	lsize = 0;
 }
 
 #endif

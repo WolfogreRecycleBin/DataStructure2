@@ -14,7 +14,7 @@ int main(void)
 			bt.Insert(elem[i]);
 		}
 
-		cout << "构造的二叉平衡树，括号内的数字为结点的平衡因子:" << endl;
+		cout << "构造的二叉平衡树，括号内的数字为结点的左子树节点数:" << endl;
 		DisplayBTWithTreeShape(bt);
 		cout << endl;
 		system("PAUSE");

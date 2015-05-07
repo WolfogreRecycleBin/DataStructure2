@@ -76,7 +76,28 @@ public:
 	BinaryAVLTree(const BinaryAVLTree<ElemType> &copy);			// 复制构造函数
 	BinaryAVLTree(BinAVLTreeNode<ElemType> *r);					// 建立以r为根的平衡二叉树
 	BinaryAVLTree<ElemType> &operator=(const BinaryAVLTree<ElemType>& copy);	// 赋值语句重载
+//------------------------------------------------------------------------------------------------------------
+//added to do the homework in P310-9
+public:
+	//?
+protected:
+	void UpdateLsize(BinAVLTreeNode<ElemType> *p);
+//------------------------------------------------------------------------------------------------------------
 };
+//------------------------------------------------------------------------------------------------------------
+template <class ElemType>
+void BinaryAVLTree<ElemType>::UpdateLsize(BinAVLTreeNode<ElemType> *p)
+{
+	p->lsize = NodeCountHelp(p->leftChild);
+	if(p->leftChild != NULL)
+		UpdateLsize(p->leftChild);
+	if(p->rightChild != NULL)
+		UpdateLsize(p->rightChild);
+}
+//------------------------------------------------------------------------------------------------------------
+
+
+
 
 template <class ElemType>
 void DisplayBTWithTreeShapeHelp(const BinAVLTreeNode<ElemType> *r, int level);
@@ -391,6 +412,7 @@ void BinaryAVLTree<ElemType>::LeftRotate(BinAVLTreeNode<ElemType> *&subRoot)
 	subRoot->rightChild = ptrRChild->leftChild;	// ptrRChild的左子树链接为subRoot的右子树
 	ptrRChild->leftChild = subRoot;				// subRoot链接为ptrRChild的左孩子
 	subRoot = ptrRChild;						// subRoot指向新的根结点
+	UpdateLsize(root);
 }
 
 template <class ElemType>
@@ -403,6 +425,7 @@ void BinaryAVLTree<ElemType>::RightRotate(BinAVLTreeNode<ElemType> *&subRoot)
 	subRoot->leftChild = pLChild->rightChild;	// pLChild的右子树链接为subRoot的左子树
 	pLChild->rightChild = subRoot;				// subRoot链接为pLChild的右孩子
 	subRoot = pLChild;							// subRoot指向新的根结点
+	UpdateLsize(root);
 }
 
 template <class ElemType>
@@ -532,6 +555,7 @@ bool BinaryAVLTree<ElemType>::Insert(const ElemType &e)
                 }
 				break;
         }
+        UpdateLsize(root);
 		return true;		
 	}
 	else	// 查找成功, 则插入失败
@@ -580,6 +604,7 @@ subRoot, bool &isShorter)
 		RightRotate(subRoot->rightChild);	// 对subRoot右子树作右旋处理
 		LeftRotate(subRoot);				// 对subRoot作左旋处理
 	}
+	UpdateLsize(root);
 }
 
 template <class ElemType>
@@ -625,6 +650,7 @@ void BinaryAVLTree<ElemType>::DeleteRightBalance(BinAVLTreeNode<ElemType> *
 		LeftRotate(subRoot->leftChild);	// 对subRoot左子树作左旋处理
 		RightRotate(subRoot);			// 对subRoot作右旋处理
 	}
+	UpdateLsize(root);
 }
 
 template <class ElemType>
@@ -685,6 +711,7 @@ LinkStack<BinAVLTreeNode<ElemType> *> &s)
 			}
 		}
 	}
+	UpdateLsize(root);
 }
 
 template <class ElemType>
@@ -726,6 +753,7 @@ BinAVLTreeNode<ElemType> *&p, LinkStack< BinAVLTreeNode<ElemType> *> &s)
 		else
 			DeleteHelp(key, tmpF->leftChild, s);
 	}
+	UpdateLsize(root);
 }
 
 template <class ElemType>
@@ -809,7 +837,7 @@ void DisplayBTWithTreeShapeHelp(const BinAVLTreeNode<ElemType> *r, int level)
 		cout << endl << endl;					//显示新行	
 		for(int i = 0; i < level - 1; i++)
 			cout << "       ";				//确保在第level列显示结点
-		cout << r->data << "(" << r->bf << ")";				//显示结点
+		cout << r->data << "(" << r->lsize << ")";				//显示结点
 		DisplayBTWithTreeShapeHelp<ElemType>(r->leftChild, level + 1);//显示左子树
 	}
 }
