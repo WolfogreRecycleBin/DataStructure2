@@ -30,6 +30,7 @@ int main(void)
 			cout << endl << "5. 中序遍历.";
 			cout << endl << "6. 后序遍历.";
 			cout << endl << "7. 显示二叉平衡树.";
+			cout << endl << "8. 查找第x个元素.";
 			cout << endl << "0. 退出";
 			cout << endl << "选择功能(0~7):";
 			cin >> c;
@@ -69,6 +70,18 @@ int main(void)
 					cout << endl;
 					DisplayBTWithTreeShape(bt);
 					break;	
+				case '8':
+				{
+					cout << endl;
+					cout << endl << "输入元素的序号x:";
+					cin >> x;
+					int e;
+					if (bt.FindNumber(x,e) == NOT_PRESENT)
+					   	cout << endl << "序号范围有误.";
+				  	else
+					   	cout << endl << "第" << x << "号元素是" << e << endl;
+					break;	
+				}
 			}
 		}
 

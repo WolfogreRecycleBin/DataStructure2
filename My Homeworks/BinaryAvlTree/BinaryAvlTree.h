@@ -79,12 +79,47 @@ public:
 //------------------------------------------------------------------------------------------------------------
 //added to do the homework in P310-9
 public:
-	//?
+	Status FindNumber(int index, ElemType &e) const;
 protected:
+	ElemType FindNumber(BinAVLTreeNode<ElemType> *p, int index, int num_found)const;
 	void UpdateLsize(BinAVLTreeNode<ElemType> *p);
 //------------------------------------------------------------------------------------------------------------
 };
 //------------------------------------------------------------------------------------------------------------
+
+template <class ElemType>
+Status BinaryAVLTree<ElemType>::FindNumber(int index, ElemType &e) const
+{
+	if(index <= 0 || index > NodeCount())
+		return NOT_PRESENT;
+	e = FindNumber(root,index,0);
+	return ENTRY_FOUND;
+}
+
+template <class ElemType>
+ElemType BinaryAVLTree<ElemType>::FindNumber(BinAVLTreeNode<ElemType> *p, int index, int num_found) const
+{
+	cout << endl;
+	int p_index = num_found + p->lsize + 1;
+	cout << p->data << "得知自己为根的树前头有" << num_found << "个结点,算出自己是第" << p_index << "个结点," << endl;
+	if(index == num_found + p->lsize + 1)
+	{
+		cout << "于是知道自己就是目标结点!!!" << endl;
+		return p->data;
+	}
+	cout << "于是知道自己不是目标结点," << endl;
+	if(index < num_found + p->lsize + 1)
+	{
+		cout << "目标结点在它的左子树里,它告诉它的左孩子以你为根的树前面有" << num_found << "个结点." << endl;
+		return FindNumber(p->leftChild,index,num_found);
+	}
+	if(index > num_found + p->lsize + 1)
+	{
+		cout << "目标结点在它的右子树里,它告诉它的右孩子以你为根的树前面有" << p_index << "个结点." << endl;
+		return FindNumber(p->rightChild,index,p_index);
+	}
+}
+
 template <class ElemType>
 void BinaryAVLTree<ElemType>::UpdateLsize(BinAVLTreeNode<ElemType> *p)
 {
