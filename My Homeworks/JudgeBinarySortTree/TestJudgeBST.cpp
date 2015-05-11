@@ -31,8 +31,9 @@ int main(void)
         cout << endl << "9. 显示二叉树.";
         cout << endl << "a. 判断是否为二查排序树.";
         cout << endl << "b. 修改结点的值.";
+        cout << endl << "c. 判断是否为二查排序树(方法2).";
 		cout << endl << "0. 退出";
-		cout << endl << "选择功能(0~7):";
+		cout << endl << "选择功能:";
 		cin >> c;
 		switch (c) 	{
 		    case '1':
@@ -107,6 +108,15 @@ int main(void)
 					bt.SetElem(p,new_value);					
 			    }
 			    break;
+			case 'c':
+				cout << endl;
+				if(JudgeBST2(bt))
+					cout << "二叉树是二查排序树." << endl;
+				else
+					cout << "二叉树不是二查排序树." << endl;
+				cout << endl;
+				system("pause");
+				break;
 		}
 	}
 

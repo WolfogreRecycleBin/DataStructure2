@@ -69,4 +69,28 @@ bool CheckSubtree(BinTreeNode<ElemType> *sub_root, ElemType *min, ElemType *max)
 	return result;
 }
 
+template <class ElemType>
+bool JudgeBST2(const BinaryTree<ElemType> &tree)
+{
+	BinTreeNode<ElemType> *root = tree.GetRoot();
+	ElemType dynamic_prior = -10000000;
+	return JudgeBST2Help(root, dynamic_prior);
+}
+
+template <class ElemType>
+bool JudgeBST2Help(BinTreeNode<ElemType> *p, ElemType &dynamic_prior)
+{
+	if(p->leftChild != NULL && !JudgeBST2Help(p->leftChild,dynamic_prior))
+		return false;
+	if(p->data < dynamic_prior)
+	{
+		cout << p->data << "ะกำฺ" << dynamic_prior << endl;
+		return false;
+	}
+	dynamic_prior = p->data;
+	if(p->rightChild != NULL && !JudgeBST2Help(p->rightChild,dynamic_prior))
+		return false;
+	return true;
+}
+
 #endif
