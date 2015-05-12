@@ -76,11 +76,15 @@ void BinarySortTree<ElemType>::FindLargerThan(const ElemType &x)
 template <class ElemType>
 void BinarySortTree<ElemType>::FindLargerThan(const ElemType &x, BinTreeNode<ElemType> *p)
 {
-	if(p == NULL || p->data < x)
+	if(p == NULL)
 		return;
+	if(p->data > x)
+	{
+		FindLargerThan(x, p->leftChild);
+		cout << p->data << "\t";
+	}
 	FindLargerThan(x, p->rightChild);
-	cout << p->data << "\t";
-	FindLargerThan(x, p->leftChild);
+	
 }
 //----------------------------------------------------------------------------------------------
 template <class ElemType>
