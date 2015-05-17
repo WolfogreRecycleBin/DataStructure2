@@ -90,5 +90,5 @@ extraResourceOptions=
 [Resource]
 [Other]
 [History]
-TestBinarySortTree.cpp,737
-BinarySortTree.h,3594
+TestBinarySortTree.cpp,717
+BinarySortTree.h,3549

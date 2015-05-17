@@ -1,5 +1,5 @@
 [Project]
-name=BinaryAvlTree
+name=DoublyLinkedListBubbleSort
 type=0
 defaultConfig=0
 
@@ -26,7 +26,7 @@ optimizeLevel=0
 
 // linker
 libraryPath=
-outputFilename=Debug\BinaryAvlTree.exe
+outputFilename=Debug\DoublyLinkedListBubbleSort.exe
 libraries=
 extraLinkerOptions=
 ignoreStartupFile=0
@@ -64,7 +64,7 @@ optimizeLevel=2
 
 // linker
 libraryPath=
-outputFilename=Release\BinaryAvlTree.exe
+outputFilename=Release\DoublyLinkedListBubbleSort.exe
 libraries=
 extraLinkerOptions=
 ignoreStartupFile=0
@@ -80,16 +80,14 @@ resourceIncludeDirectory=
 extraResourceOptions=
 
 [Source]
-1=TestBinaryAvlTree.cpp
+1=TestDoublyLinkedListBubbleSort.cpp
 [Header]
 1=Assistance.h
-2=BinAvlTreeNode.h
-3=BinaryAvlTree.h
-4=LinkQueue.h
-5=LinkStack.h
-6=Node.h
+2=DblLinkList.h
+3=DblNode.h
+4=DoublyLinkedListBubbleSort.h
 [Resource]
 [Other]
 [History]
-TestBinaryAvlTree.cpp,1758
-BinaryAvlTree.h,5591
+TestDoublyLinkedListBubbleSort.cpp,352
+DblLinkList.h,2193
