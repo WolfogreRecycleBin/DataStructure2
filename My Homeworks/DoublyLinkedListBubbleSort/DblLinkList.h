@@ -93,8 +93,7 @@ template <class ElemType>
 void DblLinkList<ElemType>::Display()
 {
 	DblNode<ElemType>* p = head->next;
-	while(p
-		!= head)
+	while(p!= head)
 	{
 		cout << p->data << " ";
 		p = p->next;
