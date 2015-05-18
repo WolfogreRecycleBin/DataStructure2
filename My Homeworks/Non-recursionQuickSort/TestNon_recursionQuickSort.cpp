@@ -6,7 +6,7 @@ int main(void)
 	int n = 10;
 	cout << "ÅÅĞòÇ°:";
 	Display(a, n);				 
-	QuickSort(a, 0, n - 1, n);	
+	Non_recursionQuickSort(a, n);	
 	cout << "ÅÅĞòºó:";
 	Display(a, n);				
 

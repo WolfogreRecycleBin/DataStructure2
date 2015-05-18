@@ -84,7 +84,12 @@ extraResourceOptions=
 [Header]
 1=Assistance.h
 2=Non_recursionQuickSort.h
+3=LinkStack.h
+4=Node.h
 [Resource]
 [Other]
 [History]
-TestNon_recursionQuickSort.cpp,14
+LinkStack.h,0
+TestNon_recursionQuickSort.cpp,187
+Assistance.h,3010
+Non_recursionQuickSort.h,0
