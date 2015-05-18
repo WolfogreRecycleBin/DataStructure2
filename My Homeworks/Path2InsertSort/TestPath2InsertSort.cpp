@@ -4,10 +4,10 @@ int main(void)
 {
 	int a[] = {55, 63, 38, 21, 63, 92, 16, 46, 87, 72};
 	int n = 10;
-	cout << "æ’åºå‰:";
+	cout << "ÅÅĞòÇ°:";
 	Display(a, n);				 
 	Path2InsertSort(a, n);	
-	cout << "æ’åºå:";
+	cout << "ÅÅĞòºó:";
 	Display(a, n);				
 
 	system("PAUSE");			
