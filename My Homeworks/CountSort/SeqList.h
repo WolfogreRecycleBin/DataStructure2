@@ -29,9 +29,40 @@ public:
  	Status InsertElem(const ElemType &e);        // 在顺序表表尾插入元素
 	SeqList(const SeqList<ElemType> &sa);        // 复制构造函数
 	SeqList<ElemType> &operator =(const SeqList<ElemType> &sa); // 赋值语句重载
+//----------------------------------------------------------------------------------------------------------
+//added to do the homework in P341-8
+public:
+	void CountSort(bool (*Judge)(const ElemType &, const ElemType &));
+	void Display();
+//----------------------------------------------------------------------------------------------------------
 };
+//----------------------------------------------------------------------------------------------------------
+template <class ElemType>
+void SeqList<ElemType>::CountSort(bool (*Judge)(const ElemType &, const ElemType &))
+{
+	ElemType *new_elems = new ElemType[maxLength];
+	assert(new_elems);
+	for(int i = 0; i < length; ++i)
+	{
+		int count = 0;
+		for(int j = 0; j < length; ++j)
+			if(Judge(elems[j],elems[i]))
+				++count;
+		new_elems[count] = elems[i];
+		cout << "插入 " << elems[i] << " 于 " << count << " 号位;" << endl;
+	}
+	delete [] elems;
+	elems = new_elems;
+}
 
-
+template <class ElemType>
+void SeqList<ElemType>::Display()
+{
+	for(int i = 0; i < length; ++i)
+		cout << elems[i] << " ";
+	cout << endl;
+}
+//----------------------------------------------------------------------------------------------------------
 // 顺序表函数成员的实现部分
 
 template <class ElemType>

@@ -80,10 +80,12 @@ resourceIncludeDirectory=
 extraResourceOptions=
 
 [Source]
+1=TestCountSort.cpp
 [Header]
 1=Assistance.h
 2=SeqList.h
 [Resource]
 [Other]
 [History]
-SeqList.h,0
+TestCountSort.cpp,181
+SeqList.h,429
