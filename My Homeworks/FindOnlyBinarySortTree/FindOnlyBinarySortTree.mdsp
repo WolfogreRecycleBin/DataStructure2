@@ -94,6 +94,4 @@ extraResourceOptions=
 LinkStack.h,969
 LinkQueue.h,0
 TestFindOnlyBinarySortTree.cpp,414
-C:\MinGWStudio\MinGW\include\c++\3.4.2\iostream,2988
-C:\MinGWStudio\MinGW\include\c++\3.4.2\bits\basic_string.h,78907
-BinarySortTree.h,3625
+BinarySortTree.h,4603

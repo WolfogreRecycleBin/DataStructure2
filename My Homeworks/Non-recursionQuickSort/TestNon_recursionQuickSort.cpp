@@ -1,5 +1,5 @@
-#include "Non_recursionQuickSort.h"			// 快速排序算法
-
+#include "Non_recursionQuickSort.h"	
+//这道题目前没有完全符合题意，我弄不清楚题目想表达什么意思，稍后更新
 int main(void)
 {
 	int a[] = {55, 63, 38, 21, 63, 92, 16, 46, 87, 72};
