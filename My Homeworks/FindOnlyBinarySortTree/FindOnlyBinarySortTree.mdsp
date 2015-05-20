@@ -91,7 +91,7 @@ extraResourceOptions=
 [Resource]
 [Other]
 [History]
-LinkStack.h,969
-LinkQueue.h,0
 TestFindOnlyBinarySortTree.cpp,414
-BinarySortTree.h,4603
+LinkQueue.h,0
+LinkStack.h,969
+BinarySortTree.h,4049

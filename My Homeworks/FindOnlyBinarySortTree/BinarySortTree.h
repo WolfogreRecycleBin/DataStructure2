@@ -61,49 +61,22 @@ public:
 //added to do the homework in P310-10
 public:
 	void SuperFind(const ElemType &e);
-protected:
-	void SuperFindHelp(const ElemType &e, LinkStack<ElemType> &s);
 //----------------------------------------------------------------------------------------------------------------
 };
 //----------------------------------------------------------------------------------------------------------------
 template <class ElemType>
 void BinarySortTree<ElemType>::SuperFind(const ElemType &e)
 {
-	LinkStack<ElemType> s;
-	LinkStack<ElemType> s_t;
-	ElemType e_t;
-	SuperFindHelp(e, s);
-	while(!s.IsEmpty())
-	{
-		s.Pop(e_t);
-		s_t.Push(e_t);
-	}
-	s_t.Pop(e_t);
-	cout << "Â·¾¶Îª:";
-	cout << e_t;
-	while(!s_t.IsEmpty())
-	{
-		s_t.Pop(e_t);
-		cout << " -> " << e_t;
-	}
-	cout << endl;
-}
-
-template <class ElemType>
-void BinarySortTree<ElemType>::SuperFindHelp(const ElemType &e, LinkStack<ElemType> &s)
-{
 	BinTreeNode<ElemType> *q = NULL;
 	BinTreeNode<ElemType> *p = root;
 	while(p != NULL && p->data != e)
 	{
-		s.Push(p->data);
 		q = p;
 		if(p->data > e)
 			p = p->leftChild;
 		else
 			p = p->rightChild;
 	}
-	
 	if(p == NULL)
 	{
 		if(q != NULL)
@@ -119,9 +92,7 @@ void BinarySortTree<ElemType>::SuperFindHelp(const ElemType &e, LinkStack<ElemTy
 		}
 	}
 	++p->count;
-	s.Push(p->data);
 }
-
 //----------------------------------------------------------------------------------------------------------------
 
 template <class ElemType>
