@@ -87,5 +87,5 @@ extraResourceOptions=
 [Resource]
 [Other]
 [History]
-TestCountSort.cpp,181
-SeqList.h,429
+TestCountSort.cpp,151
+SeqList.h,400

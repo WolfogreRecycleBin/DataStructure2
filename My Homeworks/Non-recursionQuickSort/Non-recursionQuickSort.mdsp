@@ -89,7 +89,7 @@ extraResourceOptions=
 [Resource]
 [Other]
 [History]
-Non_recursionQuickSort.h,172
-LinkStack.h,0
+Non_recursionQuickSort.h,1351
 Assistance.h,3010
+LinkStack.h,617
 TestNon_recursionQuickSort.cpp,36
